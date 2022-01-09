@@ -1,0 +1,84 @@
+header {
+  background-color: #f8f9fa;
+  /* background-color: red; */
+  height: 3rem;
+}
+.header-wrapper, .menu, form {
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+}
+.header-wrapper {
+  margin: 0 auto;
+  width: 90%;
+  height: 100%;
+}
+h2 {
+  font-weight: 400;
+}
+form, input {
+  margin-right: .5rem;
+}
+input {
+  height: 1.9rem;
+  border: 1px solid #ced4da;
+  padding-left: .5rem;
+}
+button {
+  background-color: transparent;
+}
+input, button {
+  border-radius: 4px;
+  font-size: 1rem;
+}
+form button {
+  border: 1px solid#ffc107;
+  color: #ffc107;
+  padding: 6px 1rem;
+}
+.toggle {
+  padding: 6px 0 6px 6px;
+  border: none;
+  font-size: 1.2rem;
+}
+.toggle i {
+  margin-right: 1rem;
+  /* border: 1px solid red; */
+  padding-bottom: -1rem;
+}
+.menu-icon {
+  display: none;
+}
+.nav {
+  position: relative;
+}
+
+@media (max-width: 700px) {
+  .menu {
+    /* display: none; */
+    position: absolute;
+    width: 100%;
+    top: 3rem;
+    right: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem 5%;
+    background-color: #f8f9fa;
+  }
+  form {
+    width: 100%;
+    /* border: 1px solid red; */
+    margin: 0;
+  }
+  form input {
+    width: 100%;
+  }
+  .menu-icon {
+    display: inline-block;
+    font-size: 1.3rem;
+    padding: 4px 7px 3px;
+    border: 1px solid#9fa0a0;
+    color: #9fa0a0;
+  }
+
+}
