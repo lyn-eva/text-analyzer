@@ -1,0 +1,10 @@
+h3 {
+  font-weight: 400;
+  font-size: 1.3rem;
+}
+.btn-ctr {
+  display: flex;
+  gap: .5rem;
+  flex-wrap: wrap;
+  margin-top: .5rem;
+}
