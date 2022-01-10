@@ -4,19 +4,24 @@
   background-color: #dc3545;
   color: #fff;
   border: none;
+  box-shadow: 0 0 3px;
 }
-button:nth-of-type(2) {
+.button:hover {
+  cursor: pointer;
+  opacity: .9;
+}
+.button:nth-of-type(2) {
   background-color: #0d6efd;
 }
-button:nth-of-type(3) {
+.button:nth-of-type(3) {
   background-color: #0dcaf0;
 }
-button:nth-of-type(4) {
+.button:nth-of-type(4) {
   background-color: #ffc107;
 }
-button:nth-of-type(5) {
+.button:nth-of-type(5) {
   background-color: #198754;
 }
-button:nth-of-type(6) {
+.button:nth-of-type(6) {
   background-color: #6c757d;
 }

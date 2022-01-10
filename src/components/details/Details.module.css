@@ -8,3 +8,9 @@ section {
 .preview {
   margin-top: 1rem;
 }
+.word-count,    .char-count {
+  color: blue;
+}
+.duration {
+  color: green;
+}

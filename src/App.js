@@ -1,15 +1,17 @@
-import "./App.css";
+import { useContext } from "react";
+
 import Header from "./components/header/Header";
 import Main from "./components/main/Main";
-import Details from "./components/details/Details"
+import Details from "./components/details/Details";
+import ContextProvider from "./components/store/ContextProvider";
 
 function App() {
   return (
-    <div>
+    <ContextProvider>
       <Header />
       <Main />
       <Details />
-    </div>
+    </ContextProvider>
   );
 }
 

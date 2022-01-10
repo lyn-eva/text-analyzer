@@ -10,7 +10,7 @@ function Header() {
           <button className={styles["menu-icon"]}>
             <FasIcon className="fas fa-bars" />
           </button>
-          <div class={styles.menu}>
+          <div className={styles.menu}>
             <form>
               <input type="text" placeholder="Search" />
               <button>Search</button>
