@@ -1,0 +1,10 @@
+section {
+  margin: 1.5rem auto 0;
+  width: clamp(100px, 1400px, 90%);
+}
+.summary p {
+  margin-top: 3px;
+}
+.preview {
+  margin-top: 1rem;
+}
