@@ -32,7 +32,10 @@ const textReducer = (state, action) => {
         currentVal: state.currentVal.toLowerCase(),
       };
     case "TO_TITLECASE":
-      const titleCase = state.currentVal.replaceAll(/\S+/g, (word) => word[0].toUpperCase() + word.slice(1).toLowerCase());
+      const titleCase = state.currentVal.replaceAll(
+        /\S+/g,
+        (word) => word[0].toUpperCase() + word.slice(1).toLowerCase()
+      );
       return {
         ...state,
         currentVal: titleCase,
@@ -43,6 +46,11 @@ const textReducer = (state, action) => {
         ...state,
         currentVal: removedSpaces,
       };
+    case "COPY":
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(state.currentVal);
+      }
+      return state;
     case "CLEAR":
       return {
         ...state,
