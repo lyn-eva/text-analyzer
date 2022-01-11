@@ -3,64 +3,73 @@ import { useReducer } from "react";
 import Context from "./Context";
 
 const initial = {
+  currentVal: "",
   wordCount: 0,
   charCount: 0,
   minuteToRead: 0,
 };
 
 const textReducer = (state, action) => {
-  let word_count, char_count, minute_to_read;
-  if (action.type === "WORD_COUNT") {
-    word_count = action.string
-      .split(/[\s+]/)
-      .filter((chr) => chr !== "").length;
-    return {
-      wordCount: word_count,
-      char_count: state.charCount,
-      minuteToRead: state.minuteToRead,
-    };
-  }
-  if (action.type === "CHAR_COUNT") {
-    char_count = action.string.match(/\w/g).length;
-    return {
-      wordCount: state.wordCount,
-      charCount: char_count,
-      minuteToRead: state.minuteToRead,
-    };
-  }
-  if (action.type === "MINUTE_TO_READ") {
-    minute_to_read = state.wordCount / 200;
-    return {
-      wordCount: state.wordCount,
-      charCount: state.charCount,
-      minuteToRead: minute_to_read.toFixed(1),
-    };
+  switch (action.type) {
+    case "INPUT_CHANGE":
+      const word_count = action.string.split(/\s+/).filter((chr) => chr !== "");
+      const char_count = action.string.match(/\S/g);
+      const minute_to_read = state.wordCount / 200;
+      return {
+        currentVal: action.string,
+        wordCount: word_count ? word_count.length : 0,
+        charCount: char_count ? char_count.length : 0,
+        minuteToRead: minute_to_read.toFixed(1),
+      };
+    case "TO_UPPERCASE":
+      return {
+        ...state,
+        currentVal: state.currentVal.toUpperCase(),
+      };
+    case "TO_LOWERCASE":
+      return {
+        ...state,
+        currentVal: state.currentVal.toLowerCase(),
+      };
+    case "TO_TITLECASE":
+      const titleCase = state.currentVal.replaceAll(/\S+/g, (word) => word[0].toUpperCase() + word.slice(1).toLowerCase());
+      return {
+        ...state,
+        currentVal: titleCase,
+      };
+    case "REMOVE_EXTRA_SPACE":
+      const removedSpaces = state.currentVal.split(/\s+/).join(" ");
+      return {
+        ...state,
+        currentVal: removedSpaces,
+      };
+    case "CLEAR":
+      return {
+        ...state,
+        currentVal: "",
+      };
   }
   return initial;
 };
 
 function ContextProvider(props) {
-  const [textState, dispatchtextState] = useReducer(textReducer, initial);
+  const [details, dispatchdetails] = useReducer(textReducer, initial);
 
-  const wordCountFunc = (str) => {
-    dispatchtextState({ type: "WORD_COUNT", string: str });
+  const inputChangeFunc = (str) => {
+    dispatchdetails({ type: "INPUT_CHANGE", string: str });
   };
 
-  const charCountFunc = (str) => {
-    dispatchtextState({ type: "CHAR_COUNT", string: str });
-  };
-
-  const minuteToReadFunc = (str) => {
-    dispatchtextState({ type: "MINUTE_TO_READ", string: str });
+  const convertFunc = (type) => {
+    dispatchdetails({ type: type });
   };
 
   const ContextValue = {
-    wordCount: textState.wordCount,
-    charCount: textState.charCount,
-    minuteToRead: textState.minuteToRead,
-    wordCountFunc: wordCountFunc,
-    charCountFunc: charCountFunc,
-    minuteToReadFunc: minuteToReadFunc,
+    currentVal: details.currentVal,
+    wordCount: details.wordCount,
+    charCount: details.charCount,
+    minuteToRead: details.minuteToRead,
+    inputChangeFunc: inputChangeFunc,
+    convertFunc: convertFunc,
   };
 
   return (

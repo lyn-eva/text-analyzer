@@ -8,17 +8,16 @@ function Main(props) {
   const ctx = useContext(Context);
 
   const onChangeHandler = (e) => {
-    ctx.wordCountFunc(e.target.value);
-    ctx.charCountFunc(e.target.value);
-    ctx.minuteToReadFunc(e.target.value);
+    ctx.inputChangeFunc(e.target.value);
   };
 
   return (
     <main>
       <h1>Enter your text to analyze</h1>
       <textarea
-        onChange={onChangeHandler}
         rows="10"
+        value={ctx.currentVal}
+        onChange={onChangeHandler}
         placeholder="Enter your text here"
       />
       <Functions />

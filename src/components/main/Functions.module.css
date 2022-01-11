@@ -4,6 +4,7 @@ h3 {
 }
 .btn-ctr {
   display: flex;
+  justify-content: left;
   gap: .5rem;
   flex-wrap: wrap;
   margin-top: .5rem;
