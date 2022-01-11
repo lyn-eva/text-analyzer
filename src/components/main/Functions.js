@@ -7,6 +7,9 @@ function Functions(props) {
   const ctx = useContext(Context);
 
   const onClickHandler = (e) => {
+    if (e.target.value === 'COPY') {
+      props.select();
+    }
     ctx.convertFunc(e.target.value);
   }
 

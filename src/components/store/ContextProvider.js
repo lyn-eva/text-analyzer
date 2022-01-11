@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useReducer, useState, useEffect } from "react";
 
 import Context from "./Context";
 
@@ -50,11 +50,14 @@ const textReducer = (state, action) => {
       if (navigator.clipboard) {
         navigator.clipboard.writeText(state.currentVal);
       }
+      else { // fallback
+        document.execCommand('copy');
+      }
       return state;
     case "CLEAR":
       return {
         ...state,
-        currentVal: "",
+        currentVal: '',
       };
   }
   return initial;
@@ -62,6 +65,7 @@ const textReducer = (state, action) => {
 
 function ContextProvider(props) {
   const [details, dispatchdetails] = useReducer(textReducer, initial);
+  const [textareaRef, setTextareaRef] = useState(null);
 
   const inputChangeFunc = (str) => {
     dispatchdetails({ type: "INPUT_CHANGE", string: str });
@@ -71,6 +75,16 @@ function ContextProvider(props) {
     dispatchdetails({ type: type });
   };
 
+  const setTextAreaRef = (ref) => {
+    setTextareaRef(ref);
+  }
+
+  const selectTxtFunc = (searchKey) => {
+    const pos = details.currentVal.search(searchKey);
+    textareaRef.setSelectionRange(pos, pos + searchKey.length);
+    textareaRef.focus();
+  }
+
   const ContextValue = {
     currentVal: details.currentVal,
     wordCount: details.wordCount,
@@ -78,10 +92,14 @@ function ContextProvider(props) {
     minuteToRead: details.minuteToRead,
     inputChangeFunc: inputChangeFunc,
     convertFunc: convertFunc,
+    selectTxtFunc: selectTxtFunc,
+    setTextAreaRef: setTextAreaRef,
   };
 
   return (
-    <Context.Provider value={ContextValue}>{props.children}</Context.Provider>
+    <Context.Provider value={ContextValue}>
+      {props.children}
+    </Context.Provider>
   );
 }
 
