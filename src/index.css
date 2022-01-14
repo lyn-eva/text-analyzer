@@ -1,7 +1,13 @@
+:root {
+  --clr-hdr:  #f8f9fa;
+  --clr-primary: #fff;
+  --txt-clr: #000;
+}
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  color: var(--txt-clr);
 }
 
 ul {
@@ -9,7 +15,7 @@ ul {
 }
 
 body {
-  margin: 0;
+  background-color: var(--clr-primary);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -17,7 +23,3 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}

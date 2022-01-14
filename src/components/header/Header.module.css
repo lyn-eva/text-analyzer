@@ -1,5 +1,5 @@
 header {
-  background-color: #f8f9fa;
+  background-color: var(--clr-hdr);
   /* background-color: red; */
   height: 3.5rem;
 }
@@ -26,6 +26,7 @@ input {
 }
 button {
   background-color: transparent;
+  cursor: pointer;
 }
 input, button {
   border-radius: 4px;
@@ -52,13 +53,16 @@ form button {
 .nav {
   position: relative;
 }
+.menu {
+  background-color: var(--clr-hdr);
+}
 
 @media (max-width: 700px) {
   h2 {
     font-size: 1.3rem;
   }
   .menu {
-    /* display: none; */
+    opacity: 0;
     position: absolute;
     width: 100%;
     top: 3rem;
@@ -67,6 +71,13 @@ form button {
     align-items: flex-start;
     padding: 1rem 5%;
     background-color: #f8f9fa;
+    transform: scaleY(0);
+    transform-origin: center top;
+    transition: 300ms;
+  }
+  .menu-dropped {
+    opacity: 1;
+    transform: scaleY(1);
   }
   form {
     width: 100%;

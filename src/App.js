@@ -1,17 +1,16 @@
-import { useContext } from "react";
+import React from "react";
 
 import Header from "./components/header/Header";
 import Main from "./components/main/Main";
 import Details from "./components/details/Details";
-import ContextProvider from "./components/store/ContextProvider";
 
 function App() {
   return (
-    <ContextProvider>
+    <React.Fragment>
       <Header />
       <Main />
       <Details />
-    </ContextProvider>
+    </React.Fragment>
   );
 }
 

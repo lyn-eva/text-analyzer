@@ -8,7 +8,7 @@ function Functions(props) {
 
   const onClickHandler = (e) => {
     if (e.target.value === 'COPY') {
-      props.select();
+      props.txtAreaRef.select();
     }
     ctx.convertFunc(e.target.value);
   }

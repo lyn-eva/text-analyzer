@@ -26,7 +26,7 @@ function Main(props) {
         onChange={onChangeHandler}
         placeholder="Enter your text here"
       />
-      <Functions />
+      <Functions txtAreaRef={txtAreaRef.current} />
     </main>
   );
 }

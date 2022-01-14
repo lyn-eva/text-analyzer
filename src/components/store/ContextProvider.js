@@ -1,4 +1,4 @@
-import { useReducer, useState, useEffect } from "react";
+import { useReducer, useState } from "react";
 
 import Context from "./Context";
 
@@ -7,6 +7,7 @@ const initial = {
   wordCount: 0,
   charCount: 0,
   minuteToRead: 0,
+  darkMode: false,
 };
 
 const textReducer = (state, action) => {
@@ -21,7 +22,7 @@ const textReducer = (state, action) => {
         charCount: char_count ? char_count.length : 0,
         minuteToRead: minute_to_read.toFixed(1),
       };
-    case "TO_UPPERCASE":
+      case "TO_UPPERCASE":
       return {
         ...state,
         currentVal: state.currentVal.toUpperCase(),
@@ -31,35 +32,38 @@ const textReducer = (state, action) => {
         ...state,
         currentVal: state.currentVal.toLowerCase(),
       };
-    case "TO_TITLECASE":
-      const titleCase = state.currentVal.replaceAll(
-        /\S+/g,
-        (word) => word[0].toUpperCase() + word.slice(1).toLowerCase()
-      );
-      return {
-        ...state,
-        currentVal: titleCase,
-      };
-    case "REMOVE_EXTRA_SPACE":
+      case "TO_TITLECASE":
+        const titleCase = state.currentVal.replaceAll(
+          /\S+/g,
+          (word) => word[0].toUpperCase() + word.slice(1).toLowerCase()
+          );
+          return {
+            ...state,
+            currentVal: titleCase,
+          };
+          case "REMOVE_EXTRA_SPACE":
       const removedSpaces = state.currentVal.split(/\s+/).join(" ");
       return {
         ...state,
         currentVal: removedSpaces,
       };
-    case "COPY":
-      if (navigator.clipboard) {
-        navigator.clipboard.writeText(state.currentVal);
-      }
-      else { // fallback
-        document.execCommand('copy');
+      case "COPY":
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(state.currentVal);
+        } else {
+        // fallback
+        document.execCommand("copy");
       }
       return state;
     case "CLEAR":
       return {
         ...state,
-        currentVal: '',
+        currentVal: "",
+        wordCount: 0,
+        charCount: 0,
+        minuteToRead: 0,
       };
-  }
+    }
   return initial;
 };
 
@@ -77,13 +81,13 @@ function ContextProvider(props) {
 
   const setTextAreaRef = (ref) => {
     setTextareaRef(ref);
-  }
+  };
 
   const selectTxtFunc = (searchKey) => {
     const pos = details.currentVal.search(searchKey);
     textareaRef.setSelectionRange(pos, pos + searchKey.length);
     textareaRef.focus();
-  }
+  };
 
   const ContextValue = {
     currentVal: details.currentVal,
@@ -97,9 +101,7 @@ function ContextProvider(props) {
   };
 
   return (
-    <Context.Provider value={ContextValue}>
-      {props.children}
-    </Context.Provider>
+    <Context.Provider value={ContextValue}>{props.children}</Context.Provider>
   );
 }
 
